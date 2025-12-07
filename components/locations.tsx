@@ -3,47 +3,47 @@ export function Locations() {
     {
       name: "Apartments",
       description: "Enhance resident satisfaction with 24/7 convenience",
-      image: "/placeholder.svg?height=500&width=700",
+      image: "https://llmdocs.s3.us-east-1.amazonaws.com/markethubessentials/apartment.png",
     },
     {
       name: "Office Spaces",
       description: "Keep employees happy with on-site refreshments",
-      image: "/placeholder.svg?height=500&width=700",
+      image: "https://llmdocs.s3.us-east-1.amazonaws.com/markethubessentials/office_lounge.png",
     },
     {
       name: "Breakrooms",
       description: "Transform break areas into premium amenities",
-      image: "/placeholder.svg?height=500&width=700",
+      image: "https://llmdocs.s3.us-east-1.amazonaws.com/markethubessentials/office_breakroom.png",
     },
     {
       name: "Student Housing",
       description: "Provide convenient options for busy students",
-      image: "/placeholder.svg?height=500&width=700",
+      image: "https://llmdocs.s3.us-east-1.amazonaws.com/markethubessentials/student_housing.png",
     },
     {
       name: "Wellness Centers",
       description: "Offer healthy choices that align with wellness goals",
-      image: "/placeholder.svg?height=500&width=700",
+      image: "https://llmdocs.s3.us-east-1.amazonaws.com/markethubessentials/wellness_center.png",
     },
     {
       name: "Gyms",
       description: "Fuel workouts with protein, supplements, and hydration",
-      image: "/placeholder.svg?height=500&width=700",
+      image: "https://llmdocs.s3.us-east-1.amazonaws.com/markethubessentials/gym_lobby.png",
     },
     {
       name: "Hotels",
       description: "Elevate guest experience with 24/7 convenience",
-      image: "/placeholder.svg?height=500&width=700",
+      image: "https://llmdocs.s3.us-east-1.amazonaws.com/markethubessentials/hotel_lobby.png",
     },
     {
       name: "Airports",
       description: "Serve travelers with quick, reliable options",
-      image: "/placeholder.svg?height=500&width=700",
+      image: "https://llmdocs.s3.us-east-1.amazonaws.com/markethubessentials/airport_terminal.png",
     },
     {
       name: "Warehouse & Distribution",
       description: "Keep workers fueled during long shifts",
-      image: "/placeholder.svg?height=500&width=700",
+      image: "https://llmdocs.s3.us-east-1.amazonaws.com/markethubessentials/warehouse_distribution.png",
     }
     
   ]
