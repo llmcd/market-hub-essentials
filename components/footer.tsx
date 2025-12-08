@@ -31,7 +31,7 @@ export function Footer() {
             <h4 className="font-medium mb-4">Support</h4>
             <ul className="space-y-2 text-sm text-background/70">
              <li className="pt-2">
-              <a href="#contact" className="hover:text-background transition-colors">Service Request </a>
+              <a href="/service-request" className="hover:text-background transition-colors">Service Request </a>
              </li>
             </ul>
           </div>
