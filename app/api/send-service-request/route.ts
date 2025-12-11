@@ -29,8 +29,19 @@ export async function POST(request: NextRequest) {
     const FROM_EMAIL = process.env.FROM_EMAIL_ADDRESS
     const SERVICE_WEBHOOK_URL = process.env.SERVICE_WEBHOOK_URL
 
-    if (!SERVICE_EMAIL || !FROM_EMAIL || !SERVICE_WEBHOOK_URL) {
-      return NextResponse.json({ error: "Configuration missing" }, { status: 500 })
+    const missingVars = []
+    if (!SERVICE_EMAIL) missingVars.push("SERVICE_EMAIL_ADDRESS")
+    if (!FROM_EMAIL) missingVars.push("FROM_EMAIL_ADDRESS")
+    if (!SERVICE_WEBHOOK_URL) missingVars.push("SERVICE_WEBHOOK_URL")
+    if (!process.env.RESEND_API_KEY) missingVars.push("RESEND_API_KEY")
+    if (!process.env.RECAPTCHA_SECRET_KEY) missingVars.push("RECAPTCHA_SECRET_KEY")
+
+    if (missingVars.length > 0) {
+      console.error("[v0] Missing environment variables:", missingVars.join(", "))
+      return NextResponse.json({
+        error: "Configuration missing",
+        details: `Missing: ${missingVars.join(", ")}`
+      }, { status: 500 })
     }
 
     const body = await request.json()
@@ -99,6 +110,8 @@ export async function POST(request: NextRequest) {
       formType: "service_request",
     }
 
+    console.log("[v0] Sending service request email from:", FROM_EMAIL, "to:", SERVICE_EMAIL)
+
     const [emailResponse, webhookResponse] = await Promise.all([
       resend.emails.send({
         from: FROM_EMAIL,
@@ -147,6 +160,8 @@ export async function POST(request: NextRequest) {
       console.error("[v0] Resend error:", emailResponse.error)
       return NextResponse.json({ error: "Failed to send email" }, { status: 500 })
     }
+
+    console.log("[v0] Email sent successfully! ID:", emailResponse.data?.id)
 
     if (!webhookResponse.ok) {
       console.error("[v0] Webhook error:", webhookResponse.status)
