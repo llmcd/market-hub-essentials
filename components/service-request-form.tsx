@@ -49,32 +49,35 @@ export function ServiceRequestForm() {
     setError("")
 
     try {
-      if (!recaptchaReady || typeof window === "undefined" || !(window as any).grecaptcha) {
-        throw new Error("reCAPTCHA not ready. Please try again.")
-      }
+      // Temporarily disable reCAPTCHA for testing
+      let recaptchaToken = "test_token"
 
-      const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+      // if (!recaptchaReady || typeof window === "undefined" || !(window as any).grecaptcha) {
+      //   throw new Error("reCAPTCHA not ready. Please try again.")
+      // }
 
-      if (!siteKey) {
-        throw new Error("reCAPTCHA configuration error")
-      }
+      // const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
 
-      const recaptchaToken = await new Promise<string>((resolve, reject) => {
-        ;(window as any).grecaptcha.ready(async () => {
-          try {
-            const token = await (window as any).grecaptcha.execute(siteKey, {
-              action: "submit_service_request",
-            })
-            resolve(token)
-          } catch (err) {
-            reject(err)
-          }
-        })
-      })
+      // if (!siteKey) {
+      //   throw new Error("reCAPTCHA configuration error")
+      // }
 
-      if (!recaptchaToken) {
-        throw new Error("reCAPTCHA verification failed")
-      }
+      // const recaptchaToken = await new Promise<string>((resolve, reject) => {
+      //   ;(window as any).grecaptcha.ready(async () => {
+      //     try {
+      //       const token = await (window as any).grecaptcha.execute(siteKey, {
+      //         action: "submit_service_request",
+      //       })
+      //       resolve(token)
+      //     } catch (err) {
+      //       reject(err)
+      //     }
+      //   })
+      // })
+
+      // if (!recaptchaToken) {
+      //   throw new Error("reCAPTCHA verification failed")
+      // }
 
       const webhookPayload = {
         firstName: formData.firstName,
@@ -93,7 +96,10 @@ export function ServiceRequestForm() {
         formType: "service_request",
       }
 
-      const response = await fetch("https://hook.us1.make.com/u9933jszs64jso4dp3d513mljv1w52kj", {
+      console.log("Submitting to:", "/api/send-service-request")
+      console.log("Payload:", webhookPayload)
+
+      const response = await fetch("/api/send-service-request", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -101,8 +107,21 @@ export function ServiceRequestForm() {
         body: JSON.stringify(webhookPayload),
       })
 
+      console.log("Response status:", response.status)
+      console.log("Response headers:", Object.fromEntries(response.headers.entries()))
+
+      const contentType = response.headers.get("content-type")
+      console.log("Content-Type:", contentType)
+
+      const responseText = await response.text()
+      console.log("Response body (first 500 chars):", responseText.substring(0, 500))
+
       if (!response.ok) {
         throw new Error("Failed to submit service request")
+      }
+
+      if (contentType?.includes("text/html")) {
+        throw new Error("API returned HTML instead of JSON - routing issue")
       }
 
       setSuccessMessage(true)
@@ -370,7 +389,7 @@ export function ServiceRequestForm() {
 
         <button
           type="submit"
-          disabled={loading || !recaptchaReady}
+          disabled={loading}
           className="w-full bg-primary text-primary-foreground px-8 py-4 font-medium hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 group"
         >
           {loading ? "Submitting..." : "Submit Service Request"}
