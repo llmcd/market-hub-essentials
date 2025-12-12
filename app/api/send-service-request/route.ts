@@ -23,8 +23,16 @@ async function verifyRecaptcha(token: string): Promise<boolean> {
   }
 }
 
+export async function GET() {
+  return NextResponse.json({
+    version: "v2-no-recaptcha",
+    timestamp: new Date().toISOString(),
+    recaptchaDisabled: true
+  })
+}
+
 export async function POST(request: NextRequest) {
-  console.log("========== SERVICE REQUEST STARTED ==========")
+  console.log("========== SERVICE REQUEST STARTED (v2-no-recaptcha) ==========")
   try {
     const SERVICE_EMAIL = process.env.SERVICE_EMAIL_ADDRESS
     const FROM_EMAIL = process.env.FROM_EMAIL_ADDRESS
@@ -65,10 +73,11 @@ export async function POST(request: NextRequest) {
       recaptchaToken,
     } = body
 
-    const recaptchaValid = await verifyRecaptcha(recaptchaToken)
-    if (!recaptchaValid) {
-      return NextResponse.json({ error: "Bot verification failed" }, { status: 403 })
-    }
+    // Temporarily disable reCAPTCHA for testing
+    // const recaptchaValid = await verifyRecaptcha(recaptchaToken)
+    // if (!recaptchaValid) {
+    //   return NextResponse.json({ error: "Bot verification failed" }, { status: 403 })
+    // }
 
     if (!firstName || !lastName || !email || !businessName || !serviceIssues || serviceIssues.length === 0) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
