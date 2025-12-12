@@ -24,10 +24,15 @@ async function verifyRecaptcha(token: string): Promise<boolean> {
 }
 
 export async function POST(request: NextRequest) {
+  console.log("========== SERVICE REQUEST STARTED ==========")
   try {
     const SERVICE_EMAIL = process.env.SERVICE_EMAIL_ADDRESS
     const FROM_EMAIL = process.env.FROM_EMAIL_ADDRESS
     const SERVICE_WEBHOOK_URL = process.env.SERVICE_WEBHOOK_URL
+
+    console.log("SERVICE_EMAIL:", SERVICE_EMAIL ? "SET" : "MISSING")
+    console.log("FROM_EMAIL:", FROM_EMAIL ? "SET" : "MISSING")
+    console.log("RESEND_API_KEY:", process.env.RESEND_API_KEY ? "SET" : "MISSING")
 
     const missingVars = []
     if (!SERVICE_EMAIL) missingVars.push("SERVICE_EMAIL_ADDRESS")
