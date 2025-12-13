@@ -73,11 +73,10 @@ export async function POST(request: NextRequest) {
       recaptchaToken,
     } = body
 
-    // Temporarily disable reCAPTCHA for testing
-    // const recaptchaValid = await verifyRecaptcha(recaptchaToken)
-    // if (!recaptchaValid) {
-    //   return NextResponse.json({ error: "Bot verification failed" }, { status: 403 })
-    // }
+    const recaptchaValid = await verifyRecaptcha(recaptchaToken)
+    if (!recaptchaValid) {
+      return NextResponse.json({ error: "Bot verification failed" }, { status: 403 })
+    }
 
     if (!firstName || !lastName || !email || !businessName || !serviceIssues || serviceIssues.length === 0) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
