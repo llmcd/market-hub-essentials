@@ -49,35 +49,32 @@ export function ServiceRequestForm() {
     setError("")
 
     try {
-      // Temporarily disable reCAPTCHA for testing
-      let recaptchaToken = "test_token"
+      if (!recaptchaReady || typeof window === "undefined" || !(window as any).grecaptcha) {
+        throw new Error("reCAPTCHA not ready. Please try again.")
+      }
 
-      // if (!recaptchaReady || typeof window === "undefined" || !(window as any).grecaptcha) {
-      //   throw new Error("reCAPTCHA not ready. Please try again.")
-      // }
+      const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
 
-      // const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+      if (!siteKey) {
+        throw new Error("reCAPTCHA configuration error")
+      }
 
-      // if (!siteKey) {
-      //   throw new Error("reCAPTCHA configuration error")
-      // }
+      const recaptchaToken = await new Promise<string>((resolve, reject) => {
+        ;(window as any).grecaptcha.ready(async () => {
+          try {
+            const token = await (window as any).grecaptcha.execute(siteKey, {
+              action: "submit_service_request",
+            })
+            resolve(token)
+          } catch (err) {
+            reject(err)
+          }
+        })
+      })
 
-      // const recaptchaToken = await new Promise<string>((resolve, reject) => {
-      //   ;(window as any).grecaptcha.ready(async () => {
-      //     try {
-      //       const token = await (window as any).grecaptcha.execute(siteKey, {
-      //         action: "submit_service_request",
-      //       })
-      //       resolve(token)
-      //     } catch (err) {
-      //       reject(err)
-      //     }
-      //   })
-      // })
-
-      // if (!recaptchaToken) {
-      //   throw new Error("reCAPTCHA verification failed")
-      // }
+      if (!recaptchaToken) {
+        throw new Error("reCAPTCHA verification failed")
+      }
 
       const webhookPayload = {
         firstName: formData.firstName,
