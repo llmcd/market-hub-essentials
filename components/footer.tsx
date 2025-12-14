@@ -35,13 +35,9 @@ export function Footer() {
              </li>
             </ul>
           </div>
-<div>
-            <h4 className="font-medium mb-4">Contact</h4>
-            <ul className="space-y-2 text-sm text-background/70">
-              <li>(202) 630-2245</li>
-              
-            </ul>
-          </div>
+          
+        
+          
         </div>
           
 
