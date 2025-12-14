@@ -36,14 +36,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-medium mb-4">Contact</h4>
-            <ul className="space-y-2 text-sm text-background/70">
-              <li>(202) 630-2245</li>
-              
-            </ul>
-          </div>
-        </div>
+          
 
         <div className="pt-8 border-t border-background/20 text-center text-sm text-background/60">
           <p>© {new Date().getFullYear()} Market Hub Essentials. All rights reserved.</p>
