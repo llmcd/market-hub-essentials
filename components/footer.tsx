@@ -2,7 +2,7 @@ export function Footer() {
   return (
     <footer className="bg-foreground text-background py-16">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid md:grid-cols-3 gap-12 mb-12 text-center">
           <div className="space-y-4">
             <h3 className="font-serif text-2xl font-medium">Unattended Retail</h3>
             <p className="text-background/70 text-sm leading-relaxed">
@@ -18,7 +18,7 @@ export function Footer() {
                   Micro Markets
                 </a>
               </li>
-              
+
               <li>
                 <a href="#solutions" className="hover:text-background transition-colors">
                   Smart Coolers
@@ -35,11 +35,7 @@ export function Footer() {
              </li>
             </ul>
           </div>
-          
-        
-          
         </div>
-          
 
         <div className="pt-8 border-t border-background/20 text-center text-sm text-background/60">
           <p>© {new Date().getFullYear()} Market Hub Essentials. All rights reserved.</p>
