@@ -17,7 +17,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Vending Machines & Micro Markets | Market Hub Essentials | Mid-Atlantic Unattended Retail Solutions",
+  title: "Smart Coolers & Micro Markets | Market Hub Essentials | Mid-Atlantic Unattended Retail Solutions",
   description:
     "Market Hub Essentials provides unattended retail solutions including micro markets, smart vending machines, and smart coolers. Serving Richmond VA, Washington DC metro, and Philadelphia PA with plans to expand nationwide.",
   keywords: [
