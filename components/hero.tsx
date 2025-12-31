@@ -11,7 +11,6 @@ export function Hero() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            backgroundAttachment: "fixed",
           }}
         />
       </div>
