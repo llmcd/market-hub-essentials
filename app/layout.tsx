@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Vending Machines & Micro Markets | Market Hub Essentials",
+    title: "Smart Coolers & Micro Markets | Market Hub Essentials",
     description:
       "Transform any space into a revenue-generating retail experience. Market Hub Essentials brings convenience and innovation to apartments, offices, gyms, airports, and beyond across the Mid-Atlantic region.",
     url: "https://markethubessentials.com",
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vending Machines & Micro Markets | Market Hub Essentials",
+    title: "Smart Coolers & Micro Markets | Market Hub Essentials",
     description:
       "Transform any space into a revenue-generating retail experience with smart vending solutions across the Mid-Atlantic.",
     images: ["/og-image.jpg"],
